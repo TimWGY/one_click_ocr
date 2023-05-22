@@ -180,6 +180,7 @@ def run_ocr(img_filepath, wait_interval = 3, language = 'en', entry_df_csv_filep
 
     return True
 
+os.rename('/content/one_click_ocr/example.jpg','/content/example.jpg')
 
 clear_output()
-print("\nThe OCR tool is ready to use. Try running this line of code below:\n\nrun_ocr('/content/one_click_ocr/example.jpg')\n\n * Optional parameters include: language (str, 2-digit language code), wait_interval (int, in seconds), mark_img (boolean, whether to save a copy of the image with OCR results marked), ... \n\nThis OCR tool is developed as part of the Mapping Historical New York project (https://mappinghny.com) at Columbia University.\nFor more questions about the tool, please contact Tim Wu at gw2415@columbia.edu.\n\n")
+print("\nThe OCR tool is ready to use. Try running this line of code below:\n\nrun_ocr('/content/one_click_ocr/example.jpg')\n\n * Optional parameters include: language (str, 2-digit language code), wait_interval (int, in seconds)\n * You will find the OCR results in the same directory as the input image, if you don't specify custom filepaths.\n\nTo save a copy of the image with OCR entries marked, use the `mark_img` parameter: \n\nrun_ocr('/content/one_click_ocr/example.jpg', mark_img=True)\n\nThis OCR tool is developed as part of the Mapping Historical New York project (https://mappinghny.com) at Columbia University.\nFor more questions about the tool, please contact Tim Wu at gw2415@columbia.edu.\n\n")
