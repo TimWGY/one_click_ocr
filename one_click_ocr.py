@@ -134,6 +134,8 @@ def run_ocr(img_filepath, wait_interval = 3, language = 'en', entry_df_csv_filep
     
     raw_ocr_result = get_ms_ocr_result(img_filepath, wait_interval = wait_interval, language = language)
     line_df, ocr_metadata = parse_ms_ocr_result(raw_ocr_result)
+    if len(line_df) == 0:
+        return False
     line_df = line_df.reset_index().rename(columns={'index':'line_id'})
     line_df['bounding_box'] = line_df['bounding_box'].apply(lambda x: np.array(x,dtype=np.int32).reshape(-1,2))
     line_df['width, height, reading_direction, center, left_side_center, right_side_center'.split(', ')] = pd.DataFrame(line_df['bounding_box'].apply(get_bbox_features).tolist(), index=line_df.index)
