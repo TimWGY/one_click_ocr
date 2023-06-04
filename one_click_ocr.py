@@ -162,6 +162,9 @@ def run_ocr(img_filepath, wait_interval = 3, language = 'en', entry_df_csv_filep
             line_df_csv_filepath = img_filepath.replace('.'+img_extension,'__ocr_lines.csv')
         line_df.to_csv(line_df_csv_filepath, index=False)
 
+    if entry_df_csv_filepath is None:
+        entry_df_csv_filepath = img_filepath.replace('.'+img_extension,'__ocr_entries.csv')
+            
     if save_ocr_metadata:
         ocr_metadata['img_filepath'] = img_filepath
         ocr_metadata['entry_df_csv_filepath'] = entry_df_csv_filepath
@@ -176,8 +179,6 @@ def run_ocr(img_filepath, wait_interval = 3, language = 'en', entry_df_csv_filep
     for field in ['bounding_box','center','left_side_center','right_side_center']:
         entry_df[field] = entry_df[field].apply(lambda x: re.sub(r'\s+','',repr(x)).replace('array','np.array').replace('int32','np.int32'))
 
-    if entry_df_csv_filepath is None:
-        entry_df_csv_filepath = img_filepath.replace('.'+img_extension,'__ocr_entries.csv')
     entry_df.to_csv(entry_df_csv_filepath, index=False)
 
     return True
